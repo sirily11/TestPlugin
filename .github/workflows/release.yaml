@@ -12,9 +12,9 @@ jobs:
       - name: Build Swift Package
         run: swift build -c release
       - name: Archive Swift Package
-        run: zip -r -X -9 -y -q -o "build.zip" .build/release
+        run: zip -r "build.zip" .build/release
       - name: Upload Swift Package
-        uses: actions/upload-artifact@v2
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
         with:
-          name: build
-          path: build.zip
+          files: .build/release/*.dylib
