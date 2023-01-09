@@ -1,0 +1,20 @@
+name: Release
+# On Released
+on:
+  release:
+    types: [published]
+
+jobs:
+  build-swift:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build Swift Package
+        run: swift build -c release
+      - name: Archive Swift Package
+        run: zip -r -X -9 -y -q -o "build.zip" .build/release
+      - name: Upload Swift Package
+        uses: actions/upload-artifact@v2
+        with:
+          name: build
+          path: build.zip
