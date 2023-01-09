@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "plugininterface",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/swift-setup/PluginInterface",
+      "state" : {
+        "branch" : "main",
+        "revision" : "1e7c4080523ba64fb4118076d782bae5137f8f50"
+      }
+    }
+  ],
+  "version" : 2
+}
