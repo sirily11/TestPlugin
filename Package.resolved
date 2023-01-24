@@ -5,8 +5,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/swift-setup/PluginInterface",
       "state" : {
-        "branch" : "main",
-        "revision" : "1e7c4080523ba64fb4118076d782bae5137f8f50"
+        "revision" : "25340c9963fd758a605e337c3b7661d73ff6d033",
+        "version" : "1.2.0"
       }
     }
   ],

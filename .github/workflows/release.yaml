@@ -6,15 +6,15 @@ on:
 
 jobs:
   build-swift:
-    runs-on: macos-latest
+    runs-on: macos-12
     steps:
       - uses: actions/checkout@v2
       - name: Build Swift Package
         run: swift build -c release
       - name: Archive Swift Package
-        run: cd .build/release && tar -cvf build_macos.tar *.dylib && cp build_macos.tar ../../.. && cd ../..
+        run: python3 package.py --ext=*.dylib
       - name: Upload Swift Package
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
         with:
-          files: build_macos.tar
+          files: "*.zip"
