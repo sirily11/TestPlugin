@@ -32,8 +32,8 @@ class System(enum.Enum):
             raise Exception("Unknown system")
 
 
-def get_all_files(with_ext: str, in_folder: str = ".") -> List[str]:
-    files = glob.glob(in_folder + "/**/*." + with_ext, recursive=True)
+def get_all_files(pattern: str, in_folder: str = ".") -> List[str]:
+    files = glob.glob(path.join(in_folder, pattern), recursive=True)
     # unique files
     files = list(set(files))
     return files
@@ -45,22 +45,22 @@ def compress(files: List[str]):
     with zipfile.ZipFile(f"{current_system}.zip", "w") as zip:
         for file in files:
             base_name = path.basename(file)
-            logging.info(f"Compressing {base_name}")
+            logging.info(f"Compressing {file}")
             zip.write(file, arcname=base_name)
 
 
 if __name__ == '__main__':
     # get ext from args
     arg_parser = argparse.ArgumentParser()
-    arg_parser.add_argument("--ext", type=str, required=True)
+    arg_parser.add_argument("--pattern", type=str, required=True)
     arg_parser.add_argument("--folder", type=str, default=".")
 
     args = arg_parser.parse_args()
-    ext = args.ext
+    pattern = args.pattern
     in_folder = args.folder
 
     # get all files with ext
-    files = get_all_files(ext, in_folder=in_folder)
-    logging.info(f"Found {len(files)} files with extension {ext}")
+    files = get_all_files(pattern=pattern, in_folder=in_folder)
+    logging.info(f"Found {len(files)} files with pattern {pattern}")
     # compress files
     compress(files)
