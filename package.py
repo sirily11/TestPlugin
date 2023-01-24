@@ -34,6 +34,8 @@ class System(enum.Enum):
 
 def get_all_files(with_ext: str, in_folder: str = ".") -> List[str]:
     files = glob.glob(in_folder + "/**/*." + with_ext, recursive=True)
+    # unique files
+    files = list(set(files))
     return files
 
 
