@@ -51,12 +51,14 @@ if __name__ == '__main__':
     # get ext from args
     arg_parser = argparse.ArgumentParser()
     arg_parser.add_argument("--ext", type=str, required=True)
+    arg_parser.add_argument("--folder", type=str, default=".")
 
     args = arg_parser.parse_args()
     ext = args.ext
+    in_folder = args.folder
 
     # get all files with ext
-    files = get_all_files(ext)
+    files = get_all_files(ext, in_folder=in_folder)
     logging.info(f"Found {len(files)} files with extension {ext}")
     # compress files
     compress(files)

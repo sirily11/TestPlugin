@@ -3,6 +3,7 @@ name: Release
 on:
   release:
     types: [published]
+  push:
 
 jobs:
   build-swift:
@@ -12,7 +13,7 @@ jobs:
       - name: Build Swift Package
         run: swift build -c release
       - name: Archive Swift Package
-        run: python3 package.py --ext=*.dylib
+        run: python3 package.py --ext=dylib
       - name: Upload Swift Package
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
